@@ -11,6 +11,7 @@ import { Trainer } from '../../class/trainer';
 })
 export class TrainerListComponent implements OnInit {
 
+  pageOfItems: Array<any>;
   trainers: Trainer[];
   trainerQualifications :any;
 
@@ -24,6 +25,10 @@ export class TrainerListComponent implements OnInit {
 
   updateTrainerDetails(){
     this.router.navigate(['/manager/update-trainer']);
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
   }
 
 }

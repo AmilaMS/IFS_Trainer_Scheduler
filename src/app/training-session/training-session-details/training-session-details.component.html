@@ -66,20 +66,99 @@
                         <label class="col-md-7 col-sm-5 col-form-label">{{trainingSession.location}}</label>
                     </div>
                     <div class="row">
-                        <label class="col-md-4 col-sm-3 col-form-label">Training Room Capacity</label>
+                        <label class="col-md-4 col-sm-3 col-form-label">Training Room</label>
                         <label class="col-md-1 col-sm-1 col-form-label">:</label>
                         <label class="col-md-7 col-sm-5 col-form-label">{{trainingSession.trainingRoom}}</label>
                     </div>
+
                     <div class="row">
                         <label class="col-md-4 col-sm-3 col-form-label">Assigned Trainers</label>
                         <label class="col-md-1 col-sm-1 col-form-label">:</label>
-                        <label class="col-md-7 col-sm-5 col-form-label">text</label>
+                        <label class="col-md-7 col-sm-5 col-form-label">
+              <tr *ngFor="let t of trainingSession.trainers">
+                <td>{{ t.name }}
+                </td>
+              </tr>
+            </label>
                     </div>
+
+
                     <div class="row">
-                        <label class="col-md-4 col-sm-3 col-form-label">Allocated VMs</label>
+                        <label class="col-md-4 col-sm-3 col-form-label"> Virtual Machine Allocation</label>
                         <label class="col-md-1 col-sm-1 col-form-label">:</label>
-                        <label class="col-md-7 col-sm-5 col-form-label">text</label>
+                        <label class="col-md-7 col-sm-5 col-form-label">
+              <tr *ngFor="let tentativeVirtualMachine of tentativeVirtualMachines">
+                <td>{{ tentativeVirtualMachine.name }} : Id - {{tentativeVirtualMachine.virtualMachineId}}
+                </td>
+              </tr>
+            </label>
                     </div>
+                    <hr *ngIf="authority === 'trainer'">
+                    <b *ngIf="authority === 'trainer'">Update virtual machines if you want to change them by choosing from already
+            allocated virtual machines
+            and free virtual machines.</b>
+
+                    <div *ngIf="authority === 'trainer'">
+                        <br>
+                        <label>
+              <b>Free Virtual Machines :</b>
+            </label>
+                        <tr *ngFor="let freeVirtualMachine of freeVirtualMachines">
+                            <td>{{ freeVirtualMachine.name }} : Id - {{freeVirtualMachine.virtualMachineId}}</td>
+                        </tr>
+                    </div>
+
+                    <form (ngSubmit)="getAvailableVM()" *ngIf="authority === 'trainer'">
+
+                        <div class="form-group">
+
+
+                        </div>
+
+                        <Br>
+                        <button class="btn btn-dark col-md-4" type="submit">Get Available VM's</button>
+
+                    </form>
+
+                    <br>
+
+                    <form (ngSubmit)="addVm()" *ngIf="authority === 'trainer'">
+
+                        <div class="form-group">
+                            <br>
+                            <label style="color: black;">
+                Enter VM IDs
+              </label>
+
+                            <input type="number" class="form-control" id="vmId" [(ngModel)]="virtualMachineId" name="vmId">
+
+
+
+
+
+
+
+                        </div>
+
+
+                        <button class="btn btn-dark" type="submit">Add Vm</button>
+
+                    </form>
+                    <br>
+                    <div *ngIf="authority === 'trainer'">
+                        <br>
+                        <label>
+              <b>Newly allocated machine IDs :</b>
+            </label>
+                        <tr *ngFor="let vmid of virtualMachineIds">
+                            <td>{{ vmid }} </td>
+                        </tr>
+                    </div>
+
+
+                    <br>
+                    <button class="btn btn-success" (click)="allocateVMs()" *ngIf="authority === 'trainer'">Update</button>
+
 
 
                 </div>

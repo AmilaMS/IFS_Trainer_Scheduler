@@ -2,7 +2,8 @@
     <div class="col-md-7">
         <div class="card">
             <div class="card-header">
-                <h3 style="text-align: center;"><strong>Update Training Session</strong></h3>
+                <h2 style="text-align: center;"><strong>Update Training Session</strong></h2>
+                <h3 style="text-align: center;"><strong>Basic Information</strong></h3>
             </div>
             <div class="card-body">
                 <form class="form-horizontal" (ngSubmit)="onSubmit()" ngNativeValidate>
@@ -139,86 +140,93 @@
     <div class="col-md-5 ">
         <div class="card">
             <div class="card-header">
-                <i class="icon-calendar"></i><strong>Training Sessions</strong>
+                <h2 style="text-align: center;"><strong>VM Allocation Update Section</strong></h2>
+            </div>
 
-                <h2>VM Allocation Section</h2>
+            <div class="card-body">
 
-                <form (ngSubmit)="getAvailableVM()">
+                <button class="btn btn-block btn-outline-info mb-3" (click)="getAvailableVM()">Get Available VirtualMachines</button>
 
-                    <button class="btn btn-primary btn1" (click)="getAvailableVM()">Get Available VirtualMachines</button>
-
-                    <br>
-                    <br> Available VMs
-
-                </form>
-
-
-                <select [(ngModel)]="virtualMachineId" name="virtualMachineId" id="virtualMachineId">
-                        <option [ngValue]="null" [disabled]="true">VM Available</option>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label " for="trainingRoom"> Available VMs</label>
+                    <div class="col-md-9">
+                        <select [(ngModel)]="virtualMachineId" name="virtualMachineId" id="virtualMachineId" class="form-control ">
+                        <option [ngValue]="virtualMachine" disabled selected>Select Virtual Machines</option>
                         <option *ngFor="let virtualMachine of availableVirtualMachines" [value]="virtualMachine.virtualMachineId">
                             Id is : {{virtualMachine.virtualMachineId}} region : {{virtualMachine.region}} Version is {{virtualMachine.version}}
                         </option>
                     </select>
+                    </div>
+                </div>
 
 
-                <br>
-                <br>
+
                 <form (ngSubmit)="addVm()">
-                    <button class="btn btn-primary btn1" type="submit">Add Vm</button>
+                    <div class="form-group row ">
+                        <label class="col-md-3 col-form-label "> </label>
+                        <button class="btn btn-outline-success col-md-6" type="submit">Add Vm</button>
+                    </div>
                 </form>
 
-                <br>
-                <h3>Added Virtual Machine ID's Are : </h3>
+                <div class="form-group row ">
+                    <label class="col-md-12 col-form-label"><b> Added Virtual Machines :</b></label>
+                </div>
 
-                <li *ngFor="let temp of trainingSession.virtualMachines">
+                <div class="form-group row ">
+                    <li *ngFor="let temp of trainingSession.virtualMachines" class="col-md-12 mb-2 ">
 
-                    VM Id : {{temp.virtualMachineId}} VM Name {{temp.name}}
-                    <button (click)="removeVirtualMachineID(temp)">Delete</button>
-                </li>
+                        VM Id : {{temp.virtualMachineId}} VM Name {{temp.name}}
+                        <button (click)="removeVirtualMachineID(temp)" class="btn btn-danger">Delete</button>
+                    </li>
+                </div>
 
-                <hr>
+            </div>
 
-                <h2>Trainer Allocation Section</h2>
+
+
+            <div class="card-header">
+                <h2 style="text-align: center;"><strong>Trainer Allocation Section</strong></h2>
+            </div>
+
+            <div class="card-body">
 
                 <form (ngSubmit)="getAvailableTrainers()">
-                    <button class="btn btn-primary btn1" type="submit">Get Available Trainers</button>
+                    <button class="btn btn-block btn-outline-info mb-3" type="submit">Get Available Trainers</button>
                 </form>
 
-                <br>
-                <br>
-
-                <form (ngSubmit)="getAvailableTrainers()">
-                    Available Trainers
-                </form>
-
-                <select [(ngModel)]="trainerId" name="trainerId" id="trainerId" class="form-group">
-                            <option [ngValue]="null" [disabled]="true">Trainers Available</option>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label " for="trainingRoom"> Available Trainers</label>
+                    <div class="col-md-9">
+                        <select [(ngModel)]="trainerId" name="trainerId" id="trainerId" class="form-control ">
+                            <option [ngValue]="trainers" disabled selected>Select Trainers</option>
                             <option *ngFor="let trainer of availableTrainers" [value]="trainer.trainerId">
                                     Name : {{trainer.name}} specialities are {{trainer.qualifications}}
                             </option>
                         </select>
+                    </div>
+                </div>
 
                 <form (ngSubmit)="addTrainer()">
-                    <button class="btn btn-primary btn1" type="submit">Add trainer</button>
+                    <div class="form-group row ">
+                        <label class="col-md-3 col-form-label "> </label>
+                        <button class="btn btn-outline-success col-md-6" type="submit">Add Trainer</button>
+                    </div>
                 </form>
 
-                <br>
-                <h3>Added Trainers :</h3>
+                <div class="form-group row ">
+                    <h4 class="col-md-12 col-form-label"><b> Added Trainers :</b></h4>
+                </div>
 
-                <li *ngFor="let temp of trainingSession.trainers">
+                <div class="form-group row ">
+                    <li *ngFor="let temp of trainingSession.trainers" class="col-md-12 mb-2 ">
 
-                    Trainer Id : {{temp.trainerId}} {{temp.name}}
-                    <button (click)="removeTrainer(temp)">Delete</button>
-                </li>
-
-                <br>
-                <br>
-
-
-
+                        Trainer Id : {{temp.trainerId}} {{temp.name}}
+                        <button (click)="removeTrainer(temp)" class="btn btn-danger">Delete</button>
+                    </li>
+                </div>
 
             </div>
+
         </div>
     </div>
-    <!--/.col-->
 </div>

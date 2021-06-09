@@ -58,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let trainingSession of trainingSessions">
+                            <tr *ngFor="let trainingSession of pageOfItems">
                                 <td>{{ trainingSession.sessionName }}</td>
                                 <td>{{ trainingSession.startDate }}</td>
                                 <td>{{ trainingSession.duration }}</td>
@@ -67,32 +67,20 @@
                                 <td>{{ trainingSession.type }}</td>
                                 <td>{{ trainingSession.deliveryMethod }}</td>
                                 <td>
-                                    <div class="row align-items-center">
-                                        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                                            <button type="button" class="btn btn-block btn-outline-warning" (click)="updateTrainingSession(trainingSession.id)">Update</button>
-                                        </div>
-                                        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                                            <button type="button" class="btn btn-block btn-outline-danger" (click)="deleteTrainingSession(trainingSession.id)">Delete</button>
-                                        </div>
-                                        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                                            <button type="button" class="btn btn-block btn-outline-info" (click)="getTrainingSessionDetails(trainingSession.id)">Info</button>
-                                        </div>
-                                    </div>
+
+                                    <button type="button" class="btn btn-info" (click)="getTrainingSessionDetails(trainingSession.id)">Info</button>
+                                    <button type="button" *ngIf="authority === 'manager'" class="btn btn-warning" (click)="updateTrainingSession(trainingSession.id)">Update</button>
+                                    <button type="button" *ngIf="authority === 'manager'" class="btn btn-danger" (click)="deleteTrainingSession(trainingSession.id)">Delete</button>
 
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+
+                </div>
+
+                <div class="card-footer">
+                    <jw-pagination [items]="trainingSessions" (changePage)="onChangePage($event)"></jw-pagination>
                 </div>
             </div>
         </div>

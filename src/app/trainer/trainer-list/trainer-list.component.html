@@ -12,50 +12,23 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Username</th>
-                                <th>Email</th>
                                 <th>Type</th>
-                                <th>Qualification</th>
-
-                                <th></th>
+                                <th>Skills</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let trainer of trainers">
+                            <tr *ngFor="let trainer of pageOfItems">
                                 <td>{{ trainer.name }}</td>
-                                <td>username</td>
-                                <td>abc@ifs.com</td>
                                 <td>{{ trainer.type }}</td>
                                 <td>{{ trainer.qualifications }}</td>
-
-                                <td>
-                                    <div class="row align-items-center">
-                                        <div class="col-3 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
-
-                                        </div>
-                                        <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
-                                            <button type="button" class="btn btn-block btn-outline-warning" (click)="updateTrainerDetails()">Update</button>
-                                        </div>
-                                        <div class="col-3 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
-                                            <!--<button type="button" class="btn btn-block btn-outline-info" (click)="getTrainingSessionDetailsOfTrainer()">Info</button>-->
-                                        </div>
-                                    </div>
-
-                                </td>
                             </tr>
 
                         </tbody>
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+
+                </div>
+                <div class="card-footer">
+                    <jw-pagination [items]="trainers" (changePage)="onChangePage($event)"></jw-pagination>
                 </div>
             </div>
         </div>

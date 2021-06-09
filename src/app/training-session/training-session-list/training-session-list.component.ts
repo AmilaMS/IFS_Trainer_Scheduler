@@ -18,6 +18,7 @@ interface Info {
 
 })
 export class TrainingSessionListComponent implements OnInit {
+  pageOfItems: Array<any>;
 
   roles: string[] = [];
   authority: string;
@@ -134,5 +135,9 @@ export class TrainingSessionListComponent implements OnInit {
   goBackToPrev() {
     console.log("clear");
     this.getTrainingSessions();
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
   }
 }
