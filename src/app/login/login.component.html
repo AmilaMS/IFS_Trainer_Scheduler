@@ -1,0 +1,46 @@
+<div class="app-body" style="background-image: url(../../../assets/img/brand/IFS-background-3.jpg);background-size: cover;opacity: 1.5;">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="card-group">
+                        <div class="card p-4 ">
+                            <div class="card-body">
+                                <form (ngSubmit)="onSubmit();MyForm.reset();" ngNativeValidate #MyForm="ngForm">
+                                    <h1 style="text-align: center;"><strong>Login</strong></h1>
+                                    <p class="text-muted">Sign In to your account</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-user"></i></span>
+                                        </div>
+                                        <input type="text" [(ngModel)]="form.username" class="form-control" placeholder="Username" name="username" autocomplete="username" required>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-lock"></i></span>
+                                        </div>
+                                        <input type="password" [(ngModel)]="form.password" class="form-control" placeholder="Password" name="password" autocomplete="current-password" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+
+                                        </div>
+
+                                        <div class="col-6">
+                                            <button type="submit" class="btn btn-primary px-4">Login</button>
+                                        </div>
+                                        <div class="col-3">
+
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

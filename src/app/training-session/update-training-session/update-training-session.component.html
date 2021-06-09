@@ -1,0 +1,328 @@
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h3 style="text-align: center;"><strong>Update Training Session</strong></h3>
+                <h4 style="text-align: center;"><strong>Basic Details</strong></h4>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" (ngSubmit)="onSubmit()" ngNativeValidate>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="text-input">Session Name</label>
+                        <div class="col-md-8">
+                            <input type="text" [(ngModel)]="trainingSession.sessionName" id="sessionName" name="sessionName" class="form-control" placeholder="Text" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="date-input">Start Date</label>
+                        <div class="col-md-8">
+                            <input class="form-control" [(ngModel)]="trainingSession.startDate" id="startDate" type="date" name="startDate" placeholder="date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="number-input">Duration</label>
+                        <div class="col-md-8">
+                            <input type="number" [(ngModel)]="trainingSession.duration" id="duration" name="duration" class="form-control " required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="number-input">Max Participants</label>
+                        <div class="col-md-8">
+                            <input type="number" [(ngModel)]="trainingSession.maxParticipants" id="maxParticipants" name="maxParticipants" class="form-control " required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="text-input">IFS Application Version</label>
+                        <div class="col-md-8">
+                            <input type="text" [(ngModel)]="trainingSession.ifsApplicationVersion" id="ifsApplicationVersion" name="ifsApplicationVersion" class="form-control" placeholder="Text" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="number-input">Buffer Time</label>
+                        <div class="col-md-8">
+                            <input type="number" [(ngModel)]="trainingSession.bufferTime" id="bufferTime" name="bufferTime" class="form-control ">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="text-input">Manager Comment</label>
+                        <div class="col-md-8">
+                            <input type="text" [(ngModel)]="trainingSession.managerComment" id="managerComment" name="managerComment" class="form-control" placeholder="Text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="select1 ">Training Session Type</label>
+                        <div class="col-md-8">
+                            <select id="trainingSessionType" [(ngModel)]="trainingSession.type" name="trainingSessionType" class="form-control " required>
+                                <option value="Functional">Select Session Type</option>
+                                <option value="Functional">Functional</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Developer">Developer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="deliveryMethod">Delivery Method</label>
+                        <div class="col-md-8">
+                            <select id="deliveryMethod" [(ngModel)]="trainingSession.deliveryMethod" name="deliveryMethod" class="form-control " required>
+                                <option value="Functional">Select Delivery Method</option>
+                                <option value="Inbound">Inbound</option>
+                                <option value="Outbound">Outbound</option>
+                                <option value="Virtual">Virtual</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="trainingCoordinator">Training Coordinator</label>
+                        <div class="col-md-8">
+                            <select id="trainingCoordinator" [(ngModel)]="trainingSession.trainingCoordinator" name="trainingCoordinator" class="form-control ">
+                                
+                                <option *ngFor="let trainingCordinator of trainingCordinators" [value]="trainingCordinator.Value" >{{trainingCordinator.name}}</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="trainingLocation">Training Location</label>
+                        <div class="col-md-8">
+                            <select id="trainingLocation" [(ngModel)]="trainingSession.location" name="location" class="form-control ">
+                                <option *ngFor="let trainingLocation of trainingLocations" [value]="trainingLocation.Value" >{{trainingLocation.locationName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="trainingRoom">Training Room Capacity</label>
+                        <div class="col-md-8">
+                            <select id="trainingRoom" [(ngModel)]="trainingSession.trainingRoom" name="trainingRoom" class="form-control ">
+                                <option *ngFor="let trainingRoom of trainingRooms" [value]="trainingRoom.Value" >{{trainingRoom.capacity}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+
+                        <div class="col-md-12">
+                            <button type="submit " class="btn btn-success btn-block"><i class="fa fa-dot-circle-o "></i> Update Session</button>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="text-align: center;"><strong>Update Trainers</strong></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <h4><strong>Assigned Trainers</strong></h4>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Trainer Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Yiorgos Avraamu</td>
+
+                                        <td>
+                                            <div class="row align-items-center">
+
+                                                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Avram Tarasios</td>
+                                        <td>
+                                            <span class="badge badge-danger">Banned</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quintin Ed</td>
+                                        <td>
+                                            <span class="badge badge-secondary">Inactive</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enéas Kwadwo</td>
+                                        <td>
+                                            <span class="badge badge-warning">Pending</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agapetus Tadeáš</td>
+                                        <td>
+                                            <span class="badge badge-success">Active</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4><strong>Assign New Trainers</strong></h4>
+                            <form class="form-horizontal" ngNativeValidate>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label " for="available trainers">Avaliable Trainers</label>
+                                    <div class="col-md-8">
+                                        <select class="select form-control" id="trainerId" name="trainerId" multiple required>
+                                            <option value="">Allocate new trainers to session</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                            <option value="4">Four</option>
+                                            <option value="5">Five</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row ">
+
+                                    <div class="col-md-12">
+                                        <button type="submit " class="btn btn-success btn-block"><i class="fa fa-dot-circle-o "></i> Update Trainers</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="text-align: center;"><strong>Update VMs</strong></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <h4><strong>Assigned VMs</strong></h4>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Yiorgos Avraamu</td>
+
+                                        <td>
+                                            <div class="row align-items-center">
+
+                                                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Avram Tarasios</td>
+                                        <td>
+                                            <span class="badge badge-danger">Banned</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quintin Ed</td>
+                                        <td>
+                                            <span class="badge badge-secondary">Inactive</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enéas Kwadwo</td>
+                                        <td>
+                                            <span class="badge badge-warning">Pending</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agapetus Tadeáš</td>
+                                        <td>
+                                            <span class="badge badge-success">Active</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4><strong>Assign New VMs</strong></h4>
+                            <form class="form-horizontal" ngNativeValidate>
+                                <div class="form-group row ">
+                                    <label class="col-md-4 col-form-label " for="available vms">Avaliable VMs</label>
+                                    <div class="col-md-8">
+                                        <select class="select form-control" id="vmId" name="vmId" multiple required>
+                                            <option value="">Allocate VMs to session</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                            <option value="4">Four</option>
+                                            <option value="5">Five</option>
+                                            <option value="6">Six</option>
+                                            <option value="7">Seven</option>
+                                            <option value="8">Eight</option>
+                                            <option value="9">Nine</option>
+                                            <option value="10">Ten</option>
+                                            <option value="11">Eleven</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row ">
+
+                                    <div class="col-md-12">
+                                        <button type="submit " class="btn btn-success btn-block"><i class="fa fa-dot-circle-o "></i> Update VMs</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

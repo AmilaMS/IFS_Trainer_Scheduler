@@ -1,0 +1,151 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+
+        </div>
+
+        <div class="col-sm-9 col-md-8">
+            <div class="card border-info">
+                <div class="card-header">
+                    <h3 style="text-align: center;"><strong>Virtual Machine Details</strong></h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-md-4 col-sm-3 col-form-label">Virtual Machine Name</label>
+                        <label class="col-md-1 col-sm-1 col-form-label">:</label>
+                        <label class="col-md-7 col-sm-5 col-form-label">{{virtualMachine.name}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-sm-3 col-form-label">Product</label>
+                        <label class="col-md-1 col-sm-1 col-form-label">:</label>
+                        <label class="col-md-7 col-sm-5 col-form-label">{{virtualMachine.product}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-sm-3 col-form-label">Version</label>
+                        <label class="col-md-1 col-sm-1 col-form-label">:</label>
+                        <label class="col-md-7 col-sm-5 col-form-label">{{virtualMachine.version}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-sm-3 col-form-label">Region</label>
+                        <label class="col-md-1 col-sm-1 col-form-label">:</label>
+                        <label class="col-md-7 col-sm-5 col-form-label">{{virtualMachine.region}}</label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 col-sm-3 col-form-label">Training Sessions</label>
+                        <label class="col-md-1 col-sm-1 col-form-label">:</label>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Session Name</th>
+                                <th>Start Date</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let trainingSession of virtualMachine.trainingSessions">
+                                <td>{{ trainingSession.sessionName }}</td>
+                                <td>{{ trainingSession.startDate }}</td>
+                                <td>{{ trainingSession.duration }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+
+        </div>
+
+        <div class="col-sm-9 col-md-8">
+            <div class="card border-info">
+                <div class="card-header">
+
+                    <h3 style="text-align: center;">
+                        <i class="icon-calendar"></i>
+                        <strong>Virtual Machine Calender</strong>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                        <button type="button" (click)="showEvents()" class="btn btn-block btn-outline-info mb-3">View Training Sessions on Calender</button>
+                    </div>
+
+
+
+                    <div class="row text-center">
+
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                                    Previous
+                                </div>
+                                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                                    Today
+                                </div>
+                                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                                    Next
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                                    Month
+                                </div>
+                                <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                                    Week
+                                </div>
+                                <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                                    Day
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div [ngSwitch]="view">
+
+                        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                        </mwl-calendar-month-view>
+
+                        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events">
+                        </mwl-calendar-week-view>
+
+                        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events">
+                        </mwl-calendar-day-view>
+
+                    </div>
+
+
+
+                </div>
+
+                <!-----Put calender-->
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

@@ -1,0 +1,176 @@
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h3 style="text-align: center;"><strong>Create Training Session</strong></h3>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" (ngSubmit)="onSubmit()" ngNativeValidate>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="text-input">Session Name</label>
+                        <div class="col-md-8">
+                            <input type="text" id="sessionName" [(ngModel)]="trainingSession.sessionName" name="sessionName" class="form-control" placeholder="Text" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="date-input">Start Date</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="startDate" [(ngModel)]="trainingSession.startDate" type="date" name="startDate" placeholder="date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="number-input">Duration</label>
+                        <div class="col-md-8">
+                            <input type="number" id="duration" [(ngModel)]="trainingSession.duration" name="duration" class="form-control " required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="number-input">Max Participants</label>
+                        <div class="col-md-8">
+                            <input type="number" id="maxParticipants" [(ngModel)]="trainingSession.maxParticipants" name="maxParticipants" class="form-control " required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="text-input">IFS Application Version</label>
+                        <div class="col-md-8">
+                            <input type="text" id="ifsApplicationVersion" [(ngModel)]="trainingSession.ifsApplicationVersion" name="ifsApplicationVersion" class="form-control" placeholder="enter application version" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="number-input">Buffer Time</label>
+                        <div class="col-md-8">
+                            <input type="number" id="bufferTime" [(ngModel)]="trainingSession.bufferTime" name="bufferTime" class="form-control ">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="text-input">Manager Comment</label>
+                        <div class="col-md-8">
+                            <input type="text" id="managerComment" [(ngModel)]="trainingSession.managerComment" name="managerComment" class="form-control" placeholder="enter special comment">
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="select1 ">Training Session Type</label>
+                        <div class="col-md-8">
+                            <select id="trainingSessionType " [(ngModel)]="trainingSession.type" name="trainingSessionType" class="form-control " required>
+                                <option [ngValue]="SessionType" disabled selected>Select Session Type</option>
+                                <option value="Functional">Functional</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Developer">Developer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="deliveryMethod">Delivery Method</label>
+                        <div class="col-md-8">
+                            <select id="deliveryMethod" [(ngModel)]="trainingSession.deliveryMethod" name="deliveryMethod" class="form-control " required>
+                                <option [ngValue]="deliveryMethod" disabled selected>Select Delivery Method</option>
+                                <option value="Inbound">Inound</option>
+                                <option value="Outbound">Outbound</option>
+                                <option value="Virtual">Virtual</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="trainingCoordinator">Training Coordinator</label>
+                        <div class="col-md-8">
+                            <select id="trainingCoordinator" [(ngModel)]="trainingSession.trainingCordinator" name="trainingCoordinator" class="form-control ">
+                                <option [ngValue]="trainingCoordinator" disabled selected>Select Training Coordinator</option>
+                                <option *ngFor="let trainingCordinator of trainingCordinators" [ngValue]="trainingCordinator" >{{trainingCordinator.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="trainingLocation">Training Location</label>
+                        <div class="col-md-8">
+                            <select id="trainingLocation" [(ngModel)]="trainingSession.location" name="trainingLocation" class="form-control ">
+                                <option [ngValue]="trainingLocation" disabled selected>Select Training Location</option>
+                                <option *ngFor="let trainingLocation of trainingLocations" [ngValue]="location">{{trainingLocation.locationName}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="trainingRoom">Training Room</label>
+                        <div class="col-md-8">
+                            <select id="trainingRoom" [(ngModel)]="trainingSession.trainingRoom" name="trainingRoom" class="form-control ">
+                                <option [ngValue]="trainingRoom" disabled selected>Select Training Room Capacity</option>
+                                <option *ngFor="let trainingRoom of trainingRooms" [ngValue]="trainingRoom" >{{trainingRoom.capacity}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="available trainers">Avaliable Trainers</label>
+                        <div class="col-md-8">
+                            <select class="select form-control" id="trainerId" name="trainerId" multiple>
+                                <option [ngValue]="trainers" disabled selected>Select Trainers</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                              </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-4 col-form-label " for="available vms">Avaliable VMs</label>
+                        <div class="col-md-8">
+                            <select class="select form-control" id="vmId" name="vmId" multiple>
+                                <option [ngValue]="vms" disabled selected>Select VMs</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                                <option value="6">Six</option>
+                                <option value="7">Seven</option>
+                                <option value="8">Eight</option>
+                                <option value="9">Nine</option>
+                                <option value="10">Ten</option>
+                                <option value="11">Eleven</option>
+                              </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-success btn-block"><i class="fa fa-dot-circle-o "></i>Create Session</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-danger btn-block"><i class="fa fa-ban "></i> Reset</button>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-5 ">
+        <div class="card">
+            <div class="card-header">
+                <i class="icon-calendar"></i><strong>Training Sessions</strong>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>
+<!--/.row-->

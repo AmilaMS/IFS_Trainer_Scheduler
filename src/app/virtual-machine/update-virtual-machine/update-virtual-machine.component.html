@@ -1,0 +1,51 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 mx-auto">
+                    <div class="card mx-4">
+                        <div class="card-body p-4">
+                            <form (ngSubmit)="onSubmit()" ngNativeValidate>
+                                <h1 style="text-align:center;">Update Virtual Machine</h1>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-md-5 col-form-label" for="text-input"> Name</label>
+                                    <input type="text" [(ngModel)]="virtualMachine.name" name="name" class="form-control" placeholder="Name" autocomplete="name" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-md-5 col-form-label" for="text-input">Product</label>
+                                    <input type="text" [(ngModel)]="virtualMachine.product" name="product" class="form-control" placeholder="product" autocomplete="product" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-md-5 col-form-label" for="text-input">Version</label>
+                                    <input type="text" [(ngModel)]="virtualMachine.version" name="version" class="form-control" placeholder="version" autocomplete="version" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-md-5 col-form-label" for="text-input">Region(Data Center)</label>
+                                    <input type="text" [(ngModel)]="virtualMachine.region" name="region" class="form-control" placeholder="region" autocomplete="region" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-md-5 col-form-label" for="text-input">Status</label>
+                                    <select [(ngModel)]="virtualMachine.status" name="status" class="form-control">
+                                        <option [ngValue]="null" [disabled]="true">Select Status</option>
+                                        <option [value]="status1">working</option>
+                                        <option [value]="status2">repairing</option>
+                                    </select>
+
+                                </div>
+
+
+                                <button type="submit" class="btn btn-block btn-success ">Update Virtual Machine</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

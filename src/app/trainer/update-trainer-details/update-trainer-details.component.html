@@ -1,0 +1,90 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card mx-4">
+                        <div class="card-body p-4">
+                            <form>
+                                <h1 style="text-align:center;">Update Trainer</h1>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user-circle fa-fw"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Name" autocomplete="name" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-at fa-fw"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" placeholder="Email" autocomplete="email" required>
+                                </div>
+
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-key fa-fw"></i></span>
+                                    </div>
+
+                                    <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="Password" name="password" id="password" required minlength="6" />
+                                    <span class="input-group-text">
+                                        <i class="fa" 
+                                            [ngClass]="{
+                                                    'fa-eye-slash': !fieldTextType,
+                                                      'fa-eye': fieldTextType
+                                                      }"
+                                            (click)="toggleFieldTextType()"
+                                        >
+          
+                                        </i>
+                                      </span>
+                                </div>
+
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-question-circle-o fa-fw"></i></span>
+                                    </div>
+                                    <select name="type" class="form-control">
+                                        <option value="" disabled selected>Type</option>
+                                        <option value="Functional">Functional</option>
+                                        <option value="Technical">Technical</option>
+                                        <option value="Developer">Developer</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-certificate fa-fw"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Qualification" autocomplete="qualification" #qualification required>
+                                </div>
+
+                                <div class="input-group mb-4">
+                                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                                        <button type="button" class="btn btn-block btn-outline-primary" (click)="handleClear()">Add Qualification </button>
+                                    </div>
+
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-success ">Update Account</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

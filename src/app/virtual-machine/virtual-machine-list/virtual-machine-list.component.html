@@ -1,0 +1,89 @@
+<div class="animated fadeIn">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+
+                    <h3 style="text-align: center;"><strong>Virtual Machines</strong></h3>
+                </div>
+                <div class="card-body">
+                    <!----filter form-->
+                    <form (ngSubmit)="onSubmit()" class="form-inline mb-3">
+
+                        <div class="form-group mr-3 ml-3">
+                            <label class="mr-3" for="if-product">Product</label>
+                            <input type="text" id="if-product" [(ngModel)]="product" name="if-product" class="form-control" placeholder="Product" autocomplete="product">
+                        </div>
+
+                        <div class="form-group mr-3 ml-3">
+                            <label class="mr-3" for="if-version">Version</label>
+                            <input type="text" id="if-version" [(ngModel)]="version" name="if-version" class="form-control" placeholder="Version" autocomplete="version">
+                        </div>
+
+                        <div class="form-group mr-3 ml-3">
+                            <label class="mr-3" for="if-region">Region</label>
+                            <input type="text" id="if-region" [(ngModel)]="region" name="if-region" class="form-control" placeholder="Region" autocomplete="region">
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-sm btn-success mr-3"><i class="fa fa-dot-circle-o"></i> Filter</button>
+                            <button (click)="getVirtualMachines()" type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                            Reset</button>
+                        </div>
+
+                    </form>
+
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Product</th>
+                                <th>Version</th>
+                                <th>Region</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let virtualMachine of virtualMachines">
+                                <td>{{ virtualMachine.name }}</td>
+                                <td>{{ virtualMachine.product }}</td>
+                                <td>{{ virtualMachine.version }}</td>
+                                <td>{{ virtualMachine.region }}</td>
+                                <td>{{ virtualMachine.status }}</td>
+                                <td>
+                                    <button (click)="getVirtualMachineDetails(virtualMachine.virtualMachineId)" class="btn btn-info" style="margin-left: 10px;">View</button>
+                                    <button (click)="updateVirtualMachine(virtualMachine.virtualMachineId)" *ngIf="authority === 'manager'" class="btn btn-success" style="margin-left: 10px;">Update</button>
+                                    <button (click)="deleteVirtualMachine(virtualMachine.virtualMachineId)" *ngIf="authority === 'manager'" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--/.row-->
+
+    <!--/.card-->
+    <div class="row">
+
+    </div>
+    <!--/.row-->
+
+    <!--/.row-->
+</div>
