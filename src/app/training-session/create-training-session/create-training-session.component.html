@@ -86,7 +86,7 @@
                         <div class="col-md-8">
                             <select id="trainingCoordinator" [(ngModel)]="trainingSession.trainingCordinator" name="trainingCoordinator" class="form-control ">
                                 <option [ngValue]="trainingCoordinator" disabled selected>Select Training Coordinator</option>
-                                <option *ngFor="let trainingCordinator of trainingCordinators" [ngValue]="trainingCordinator" >{{trainingCordinator.name}}</option>
+                                <option *ngFor="let trainingCordinator of availabletrainingCordinators" [ngValue]="trainingCordinator" >{{trainingCordinator.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -96,8 +96,10 @@
                         <div class="col-md-8">
                             <select id="trainingLocation" [(ngModel)]="trainingSession.location" name="trainingLocation" class="form-control ">
                                 <option [ngValue]="trainingLocation" disabled selected>Select Training Location</option>
-                                <option *ngFor="let trainingLocation of trainingLocations" [ngValue]="location">{{trainingLocation.locationName}}</option>
-                            </select>
+                                <option *ngFor="let location of availablelocations" [ngValue]="location">
+                                    Location is : {{location.id}} {{location.region}} {{location.locationName}}
+                                  </option>                            
+                                </select>
 
                         </div>
                     </div>
@@ -107,43 +109,10 @@
                         <div class="col-md-8">
                             <select id="trainingRoom" [(ngModel)]="trainingSession.trainingRoom" name="trainingRoom" class="form-control ">
                                 <option [ngValue]="trainingRoom" disabled selected>Select Training Room Capacity</option>
-                                <option *ngFor="let trainingRoom of trainingRooms" [ngValue]="trainingRoom" >{{trainingRoom.capacity}}</option>
+                                <option *ngFor="let trainingRoom of availabletrainingRooms" [ngValue]="trainingRoom">
+                                    trainingRoom Capacity is : {{trainingRoom.capacity}}
+                                  </option>    
                             </select>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row ">
-                        <label class="col-md-4 col-form-label " for="available trainers">Avaliable Trainers</label>
-                        <div class="col-md-8">
-                            <select class="select form-control" id="trainerId" name="trainerId" multiple>
-                                <option [ngValue]="trainers" disabled selected>Select Trainers</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <option value="4">Four</option>
-                                <option value="5">Five</option>
-                              </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row ">
-                        <label class="col-md-4 col-form-label " for="available vms">Avaliable VMs</label>
-                        <div class="col-md-8">
-                            <select class="select form-control" id="vmId" name="vmId" multiple>
-                                <option [ngValue]="vms" disabled selected>Select VMs</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <option value="4">Four</option>
-                                <option value="5">Five</option>
-                                <option value="6">Six</option>
-                                <option value="7">Seven</option>
-                                <option value="8">Eight</option>
-                                <option value="9">Nine</option>
-                                <option value="10">Ten</option>
-                                <option value="11">Eleven</option>
-                              </select>
                         </div>
                     </div>
 
@@ -168,9 +137,144 @@
         <div class="card">
             <div class="card-header">
                 <i class="icon-calendar"></i><strong>Training Sessions</strong>
+
+                <h2>VM Allocation Section</h2>
+
+                <form (ngSubmit)="getAvailableVM()">
+
+                    <button class="btn btn-primary btn1" (click)="getAvailableVM()">Get Available VirtualMachines</button>
+
+                    <br>
+                    <br> Available VMs
+
+                </form>
+
+
+                <select [(ngModel)]="virtualMachineId" name="virtualMachineId" id="virtualMachineId">
+                        <option [ngValue]="null" [disabled]="true">VM Available</option>
+                        <option *ngFor="let virtualMachine of availableVirtualMachines" [value]="virtualMachine.virtualMachineId">
+                            Id is : {{virtualMachine.virtualMachineId}} region : {{virtualMachine.region}} Version is {{virtualMachine.version}}
+                        </option>
+                    </select>
+
+
+                <br>
+                <br>
+                <form (ngSubmit)="addVm()">
+                    <button class="btn btn-primary btn1" type="submit">Add Vm</button>
+                </form>
+
+                <br>
+                <h3>Added Virtual Machine ID's Are : </h3>
+
+                <li *ngFor="let temp of trainingSession.virtualMachines">
+
+                    VM Id : {{temp.virtualMachineId}} VM Name {{temp.name}}
+                    <button (click)="removeVirtualMachineID(temp)">Delete</button>
+                </li>
+
+                <hr>
+
+                <h2>Trainer Allocation Section</h2>
+
+                <form (ngSubmit)="getAvailableTrainers()">
+                    <button class="btn btn-primary btn1" type="submit">Get Available Trainers</button>
+                </form>
+
+                <br>
+                <br>
+
+                <form (ngSubmit)="getAvailableTrainers()">
+                    Available Trainers
+                </form>
+
+                <select [(ngModel)]="trainerId" name="trainerId" id="trainerId" class="form-group">
+                            <option [ngValue]="null" [disabled]="true">Trainers Available</option>
+                            <option *ngFor="let trainer of availableTrainers" [value]="trainer.trainerId">
+                                    Name : {{trainer.name}} specialities are {{trainer.qualifications}}
+                            </option>
+                        </select>
+
+                <form (ngSubmit)="addTrainer()">
+                    <button class="btn btn-primary btn1" type="submit">Add trainer</button>
+                </form>
+
+                <br>
+                <h3>Added Trainers :</h3>
+
+                <li *ngFor="let temp of trainingSession.trainers">
+
+                    Trainer Id : {{temp.trainerId}} {{temp.name}}
+                    <button (click)="removeTrainer(temp)">Delete</button>
+                </li>
+
+                <br>
+                <br>
+
+                <button class="btn btn-success btn-lg btn-block" (click)="loadTrainingSession()">Load Training Sessions on Calender </button>
+
+
+
             </div>
         </div>
     </div>
     <!--/.col-->
+</div>
+
+
+
+
+<h1>Calender For Training Sessions </h1>
+<br>
+
+
+<div class="row text-center" id="calender">
+
+    <div class="col-md-4">
+        <div class="btn-group">
+            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                Previous
+            </div>
+            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                Today
+            </div>
+            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                Next
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+
+    <div class="col-md-4">
+        <div class="btn-group">
+            <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                Month
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                Week
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                Day
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div [ngSwitch]="view">
+
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-month-view>
+
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events">
+    </mwl-calendar-week-view>
+
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events">
+    </mwl-calendar-day-view>
+
 </div>
 <!--/.row-->
