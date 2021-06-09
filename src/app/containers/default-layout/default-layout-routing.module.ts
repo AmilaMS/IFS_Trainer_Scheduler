@@ -93,7 +93,7 @@ const routes: Routes = [
 
       },
       {
-        path:'leave-response-form',
+        path:'leave-response-form/:id',
         component:LeaveFormComponent
 
       },

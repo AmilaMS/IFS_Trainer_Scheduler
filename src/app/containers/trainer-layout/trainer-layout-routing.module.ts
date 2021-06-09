@@ -58,7 +58,7 @@ const routes: Routes = [
         component:LeaveListComponent
       },
       {
-        path: 'update-leave-apply-form',
+        path: 'update-leave-apply-form/:id',
         component:UpdateLeaveApplyFormComponent
       },
       {

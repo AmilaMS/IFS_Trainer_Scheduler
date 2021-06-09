@@ -15,6 +15,8 @@ import { RouterModule } from '@angular/router';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AuthGuardService } from './service/auth.guard.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -68,6 +70,17 @@ import { UpdateVirtualMachineComponent } from './virtual-machine/update-virtual-
 import { VirtualMachineDetailsComponent } from './virtual-machine/virtual-machine-details/virtual-machine-details.component';
 import { VirtualMachineListComponent } from './virtual-machine/virtual-machine-list/virtual-machine-list.component';
 import { P403Component } from './views/error/p403.component';
+import { LeaveListComponent } from './leave-details/leave-list/leave-list.component';
+import { AvailabilityComponent } from './leave-details/availability/availability.component';
+import { LeaveApplyFormComponent } from './leave-details/leave-apply-form/leave-apply-form.component';
+import { LeaveRequestComponent } from './leave-details/leave-request/leave-request.component';
+import { LeaveFormComponent } from './leave-details/leave-response-form/leave-form.component';
+import { UpdateLeaveApplyFormComponent } from './leave-details/update-leave-apply-form/update-leave-apply-form.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
+import { JwPaginationComponent } from 'jw-angular-pagination';
+
+
+
 
 
 
@@ -87,6 +100,7 @@ import { P403Component } from './views/error/p403.component';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
+    NgxPaginationModule,
     IconModule,
     IconSetModule.forRoot(),
     FormsModule,
@@ -119,7 +133,15 @@ import { P403Component } from './views/error/p403.component';
     UpdateVirtualMachineComponent,
     VirtualMachineDetailsComponent,
     VirtualMachineListComponent,
-    P403Component
+    P403Component,
+    LeaveListComponent,
+    LeaveApplyFormComponent,
+    UpdateLeaveApplyFormComponent,
+    LeaveRequestComponent,
+    AvailabilityComponent,
+    LeaveFormComponent,
+    SearchfilterPipe,
+    JwPaginationComponent
 
     
   

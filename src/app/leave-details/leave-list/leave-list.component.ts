@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ITask } from '../../../interface/task';
+import { TaskService } from '../../service/task.service';
 
 @Component({
 
@@ -7,12 +9,38 @@ import { Router } from '@angular/router';
 })
 export class LeaveListComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  tasks: ITask[];
+  pageOfItems: Array<any>;
+  p: number = 1;
+  constructor(private router: Router, private leaveService: TaskService) { }
 
   ngOnInit(): void {
+    this.getTasks();
   }
 
-  updateLeaveApplyForm(){
-    this.router.navigate(['trainer/update-leave-apply-form']);
-  }  
+  getTasks() {
+    this.leaveService.getTaskList().subscribe((d) => {
+      console.log(d);
+      this.tasks = d;
+    })
+  }
+
+  updateLeaveApplyForm(id: string) {
+    console.log(id)
+    this.router.navigate(['trainer/update-leave-apply-form', id]);
+  }
+
+  deleteLeaveApplyForm(id: string) {
+    this.leaveService
+      .deleteTask(id)
+      .subscribe((d) => {
+        this.getTasks();
+      }, error => console.error(error)
+      );
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
+  }
+
 }

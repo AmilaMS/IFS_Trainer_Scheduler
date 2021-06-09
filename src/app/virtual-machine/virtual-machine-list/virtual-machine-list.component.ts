@@ -21,6 +21,8 @@ interface Info {
 export class VirtualMachineListComponent implements OnInit {
 
   info: Info;
+  pageOfItems: Array<any>;
+
 
   filterForm: FormGroup;
   product?: String;
@@ -120,5 +122,10 @@ export class VirtualMachineListComponent implements OnInit {
     })
 
   }
+
+  onChangePage(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
+  }
+
 
 }

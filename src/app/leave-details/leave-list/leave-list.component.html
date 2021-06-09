@@ -12,6 +12,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Leave Status</th>
                                 <th>Leave Type</th>
                                 <th>Date</th>
                                 <th>Description</th>
@@ -19,79 +20,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Sick</td>
-                                <td>2012/01/01</td>
-                                <td>High Fever</td>
+                            <tr *ngFor="let task of pageOfItems ">
+                                <td>{{task.title}}</td>
+                                <td>{{task.type}}</td>
+                                <td>{{task.date}}</td>
+                                <td>{{task.description}}</td>
                                 <td>
-                                    <div class="row align-items-center">
-                                        <div class="col-4 col-sm-3">
-                                            <button type="button" class="btn btn-block btn-outline-warning" (click)="updateLeaveApplyForm()">Update</button>
-                                        </div>
-                                        <div class="col-4 col-sm-3">
-                                            <button type="button" class="btn btn-block btn-outline-danger">Delete</button>
-                                        </div>
-
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Avram Tarasios</td>
-                                <td>2012/02/01</td>
-                                <td>Staff</td>
-                                <td>
-                                    <span class="badge badge-danger">Banned</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Quintin Ed</td>
-                                <td>2012/02/01</td>
-                                <td>Admin</td>
-                                <td>
-                                    <span class="badge badge-secondary">Inactive</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Enéas Kwadwo</td>
-                                <td>2012/03/01</td>
-                                <td>Member</td>
-                                <td>
-                                    <span class="badge badge-warning">Pending</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Agapetus Tadeáš</td>
-                                <td>2012/01/21</td>
-                                <td>Staff</td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
+                                    <button type="button" class="btn btn-block btn-outline-warning" (click)="updateLeaveApplyForm(task.id)">Update</button>
+                                    <button type="button" class="btn btn-block btn-outline-danger" (click)="deleteLeaveApplyForm(task.id)">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
+
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+
+                </div>
+
+                <div class="card-footer">
+                    <jw-pagination [items]="tasks" (changePage)="onChangePage($event)"></jw-pagination>
                 </div>
             </div>
         </div>
 
     </div>
-    <!--/.row-->
 
-    <!--/.card-->
-    <div class="row">
-
-    </div>
-    <!--/.row-->
-
-    <!--/.row-->
 </div>

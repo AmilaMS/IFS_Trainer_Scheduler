@@ -48,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let virtualMachine of virtualMachines">
+                            <tr *ngFor="let virtualMachine of pageOfItems">
                                 <td>{{ virtualMachine.name }}</td>
                                 <td>{{ virtualMachine.product }}</td>
                                 <td>{{ virtualMachine.version }}</td>
@@ -62,28 +62,16 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+
                 </div>
+
+                <div class="card-footer">
+                    <jw-pagination [items]="virtualMachines" (changePage)="onChangePage($event)"></jw-pagination>
+                </div>
+
             </div>
         </div>
 
     </div>
-    <!--/.row-->
 
-    <!--/.card-->
-    <div class="row">
-
-    </div>
-    <!--/.row-->
-
-    <!--/.row-->
 </div>

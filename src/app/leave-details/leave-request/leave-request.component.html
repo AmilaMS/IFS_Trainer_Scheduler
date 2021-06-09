@@ -11,65 +11,40 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Trainer Name</th>
-                                <th>Date</th>
+
+                                <th>Name</th>
+                                <th>Date </th>
+                                <th>Description</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Yiorgos Avraamu</td>
-                                <td>2012/01/01</td>
+                            <tr *ngFor="let trainer of pageOfItems ">
+
+                                <td>{{ trainer.trainer.name}} </td>
+                                <td>{{ trainer.date }}</td>
+                                <td>{{ trainer.description }}</td>
                                 <td>
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <button type="button" class="btn btn-block btn-outline-info" (click)="getLeaveForm()">Action</button>
+                                            <button type="button" class="btn btn-block btn-outline-info" (click)="getLeaveForm(trainer.id)">Action</button>
                                         </div>
-
                                     </div>
-
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Avram Tarasios</td>
-                                <td>2012/02/01</td>
-                            </tr>
-                            <tr>
-                                <td>Quintin Ed</td>
-                                <td>2012/02/01</td>
-                            </tr>
-                            <tr>
-                                <td>Enéas Kwadwo</td>
-                                <td>2012/03/01</td>
-                            </tr>
-                            <tr>
-                                <td>Agapetus Tadeáš</td>
-                                <td>2012/01/21</td>
-                            </tr>
+
                         </tbody>
+
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+
+                </div>
+
+                <div class="card-footer">
+                    <jw-pagination [items]="leaves" (changePage)="onChangePage($event)"></jw-pagination>
                 </div>
             </div>
         </div>
 
     </div>
-    <!--/.row-->
 
-    <!--/.card-->
-    <div class="row">
-
-    </div>
-    <!--/.row-->
-
-    <!--/.row-->
 </div>

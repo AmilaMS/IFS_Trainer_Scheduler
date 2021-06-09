@@ -1,79 +1,125 @@
-<div class="animated fadeIn">
+<div class="animated fadeln">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card ">
+                <div class="card-header">
+                    <h3 style="text-align: center;"><strong> Leave Lists </strong></h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <label for="search" class="col-sm-6 col-form-label"></label>
+                        <label for="search" class="col-sm-1 col-form-label">Search</label>
+                        <div class="col-sm-5">
+                            <input style="align-content:right;" type="text" [(ngModel)]="searchValue" class="form-control" id="search" />
+                        </div>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Date </th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let trainer of pageOfItems | searchfilter:searchValue ">
+                                <td scope="col">{{ trainer.trainer.name}} </td>
+                                <td scope="col">{{ trainer.date }}</td>
+                                <td scope="col">{{ trainer.description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer">
+                    <jw-pagination [items]="leaves" (changePage)="onChangePage($event)"></jw-pagination>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
 
-                    <h3 style="text-align: center;"><strong>Trainer Leave List</strong></h3>
+                    <h3 style="text-align: center;">
+                        <i class="icon-calendar"></i>
+                        <strong>Leave Calender</strong>
+                    </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Trainer Name</th>
-                                <th>Date</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Yiorgos Avraamu</td>
-                                <td>2012/01/01</td>
-                                <td>Member</td>
-                            </tr>
-                            <tr>
-                                <td>Avram Tarasios</td>
-                                <td>2012/02/01</td>
-                                <td>Staff</td>
-                            </tr>
-                            <tr>
-                                <td>Quintin Ed</td>
-                                <td>2012/02/01</td>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <td>Enéas Kwadwo</td>
-                                <td>2012/03/01</td>
-                                <td>Member</td>
-                            </tr>
-                            <tr>
-                                <td>Agapetus Tadeáš</td>
-                                <td>2012/01/21</td>
-                                <td>Staff</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-
-                    <h3 style="text-align: center;"><i class="icon-calendar"></i><strong>Leave Calender</strong></h3>
-                </div>
-                <div class="card-body">
                     <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                        <button type="button" class="btn btn-block btn-outline-info">View Leaves on Calender</button>
+                        <button class="btn btn-block btn-outline-info mb-3" (click)="loadLeavesonCalender()">
+                            View Approved Leaves on  Calender        
+                        </button>
                     </div>
+
+                    <div class="row text-center">
+
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                                    Previous
+                                </div>
+                                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                                    Today
+                                </div>
+                                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                                    Next
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                                    Month
+                                </div>
+                                <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                                    Week
+                                </div>
+                                <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                                    Day
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div [ngSwitch]="view">
+
+                        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                        </mwl-calendar-month-view>
+
+                        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events">
+                        </mwl-calendar-week-view>
+
+                        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events">
+                        </mwl-calendar-day-view>
+
+                    </div>
+
+
+
                 </div>
+
+
+
+
             </div>
         </div>
-
     </div>
-    <!--/.row-->
 
-    <!--/.card-->
 
-    <!--/.row-->
 </div>
