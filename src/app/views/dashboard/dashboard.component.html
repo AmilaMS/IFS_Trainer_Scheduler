@@ -5,6 +5,9 @@
 
 <br />
 <br />
+<br />
+<br />
+<br />
 <div class="animated fadeln">
     <div class="row">
 
@@ -14,12 +17,10 @@
                 <div class="card-header">Sessions</div>
                 <div class="card-body">
                     <div class="card-body">
-                        <button (click)="getToCreateTrainingSessions()" *ngIf="authority === 'manager'" type="button" class="btn btn-primary">
+                        <button (click)="getToCreateTrainingSessions()" type="button" class="btn btn-primary">
                             Create Training Sessions
                         </button>
-                        <button (click)="getToTrainingSessionList()" type="button" class="btn btn-primary">
-                             Training Sessions
-                        </button>
+
                     </div>
 
                     <br />
@@ -27,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3" *ngIf="authority === 'manager'">
+        <div class="col-lg-3">
             <div class="card bg-light mb-3" style="max-width: 18rem;">
                 <div class="card-header"> Trainers List</div>
                 <div class="card-body">
@@ -58,7 +59,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3" *ngIf="authority === 'manager'">
+        <div class="col-lg-3">
             <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
                 <div class="card-header"> Notifications For Requested Leaves </div>
                 <div class="card-body">

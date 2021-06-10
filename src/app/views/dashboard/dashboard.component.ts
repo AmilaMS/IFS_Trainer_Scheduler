@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['manager/create-training-session']);
   }
   getToVirtualMachine() {
-    if(this.authority === 'manager'){
+    if(this.authority == 'manager'){
       this.router.navigate(['manager/virtual-machine-list']);
     }
     else{
