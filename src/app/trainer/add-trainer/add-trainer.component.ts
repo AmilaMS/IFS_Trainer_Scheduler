@@ -61,30 +61,25 @@ export class AddTrainerComponent implements OnInit {
 
 
 
-    this.trainerService.getTrainerbyName(this.trainer.name).subscribe(data => {
-
+    this.trainerService.getTrainerbyUserName(this.signupInfo.username).subscribe(data => {
       if (data != null) {
-        alert('Trainer Exists By the Name ' + data.name);
-        //Swal.fire('Exists', 'Trainer Already Exists', 'warning');
+        //alert('Trainer Exists By the Name ' + data.name);
+        Swal.fire('Exists', 'Trainer Already Exists', 'warning');
         this.trainerExists = true;
       }
-      console.log(data);
-      //console.log('trainer Added')
-    },
-      error => console.error(error));
+    }, error => console.error(error));
 
     if (this.trainerExists == true) {
-      window.location.reload();
-      return;
+      Swal.fire('Exists', 'Trainer Already Exists', 'warning');
     } else {
 
       this.trainerService.addTrainer(this.trainer).subscribe(data => {
         console.log(data);
-        //console.log('trainer Added');
         Swal.fire('Added', 'Trainer Added Successfully', 'success');
-      },
-        error => console.error(error));
-
+        this.router.navigate(['manager/trainer-list']).then(() => {
+          //window.location.reload();
+        });
+      }, error => console.error(error));
 
       this.authService.signUp(this.signupInfo).subscribe(
         data => {
@@ -94,15 +89,14 @@ export class AddTrainerComponent implements OnInit {
         },
         error => {
           console.log(error);
+          Swal.fire('Exists', 'Trainer Already Exists', 'warning');
           this.errorMessage = error.error.message;
           this.isSignUpFailed = true;
 
         }
       );
 
-      this.router.navigate(['/trainerlist']).then(() => {
-        window.location.reload();
-      });
+
 
 
 

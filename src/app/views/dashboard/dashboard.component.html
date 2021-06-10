@@ -1,28 +1,76 @@
-<div class="app-body">
-    <main class="main d-flex align-items-center mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <div class="card mx-4">
-                        <div class="card-body p-4">
+<br />
+<br />
+<br />
+<br />
 
-                            <h1 style="text-align:center;">Profile Card</h1>
-
-                            <div class="card">
-                                <img src="../../../assets/img/brand/user.jpg" alt="John" style="width:100%">
-                                <h1>John Doe</h1>
-                                <p class="title">CEO & Founder, Example</p>
-                                <p>Harvard University</p>
+<br />
+<br />
+<div class="animated fadeln">
+    <div class="row">
 
 
-                            </div>
-
-
-                        </div>
-
+        <div class="col-lg-3">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Sessions</div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <button (click)="getToCreateTrainingSessions()" *ngIf="authority === 'manager'" type="button" class="btn btn-primary">
+                            Create Training Sessions
+                        </button>
+                        <button (click)="getToTrainingSessionList()" type="button" class="btn btn-primary">
+                             Training Sessions
+                        </button>
                     </div>
+
+                    <br />
                 </div>
             </div>
         </div>
-    </main>
+
+        <div class="col-lg-3" *ngIf="authority === 'manager'">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header"> Trainers List</div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <button (click)="getToTrainerLists()" type="button" class="btn btn-primary">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Trainers List&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
+
+                    </div>
+
+                </div>
+                <br />
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                <div class="card-header">Virtual Machines List</div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <button (click)="getToVirtualMachine()" type="button" class="btn btn-primary">
+                            &nbsp;&nbsp;Virtual Machines&nbsp;&nbsp;
+                        </button>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3" *ngIf="authority === 'manager'">
+            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                <div class="card-header"> Notifications For Requested Leaves </div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <button (click)="getToLeaveRequestList()" type="button" class="btn btn-danger">
+                            &nbsp;&nbsp;Requested Leaves&nbsp;<span class="badge badge-light"></span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+
+    </div>
 </div>

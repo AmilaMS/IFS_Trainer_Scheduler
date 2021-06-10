@@ -12,6 +12,7 @@ export class TrainerService {
   private baseURL ="http://localhost:8080/api/users";
   private trainerURL = "http://localhost:8080/api/trainers";
   private trainerbyNameURL ="http://localhost:8080/api/trainerByname";
+  private tainerbyUserNameURL = "http://localhost:8080/api/trainerByUserName";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -42,4 +43,9 @@ export class TrainerService {
   getTrainerbyName(trainerName: string):Observable<Trainer>{
     return this.httpClient.get<Trainer>(`${this.trainerbyNameURL}/${trainerName}`)
   }
+
+  getTrainerbyUserName( trainerUserName : string):Observable<Trainer>{
+    return this.httpClient.get<Trainer>(`${this.tainerbyUserNameURL}/${trainerUserName}`)
+  }
+
 }
